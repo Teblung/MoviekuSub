@@ -77,10 +77,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             override fun onReceive(context: Context, intent: Intent) {
                 when (intent.action) {
                     Intent.ACTION_POWER_CONNECTED -> {
-                        Toast.makeText(this@MainActivity, "Power Connected", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@MainActivity, "Power Connected", Toast.LENGTH_LONG)
+                            .show()
                     }
                     Intent.ACTION_POWER_DISCONNECTED -> {
-                        Toast.makeText(this@MainActivity, "Power Disconnected", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@MainActivity, "Power Disconnected", Toast.LENGTH_LONG)
+                            .show()
                     }
                 }
             }

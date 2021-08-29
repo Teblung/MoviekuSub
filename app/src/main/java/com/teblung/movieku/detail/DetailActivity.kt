@@ -45,11 +45,13 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
-     private fun ImageView.loadImage(url: String?) {
+    private fun ImageView.loadImage(url: String?) {
         Glide.with(this.context)
             .load(url)
-            .apply(RequestOptions.placeholderOf(R.drawable.ic_loading)
-                .error(R.drawable.ic_error))
+            .apply(
+                RequestOptions.placeholderOf(R.drawable.ic_loading)
+                    .error(R.drawable.ic_error)
+            )
             .centerCrop()
             .into(this)
     }

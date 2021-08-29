@@ -9,6 +9,8 @@ import com.teblung.movieku.core.data.source.remote.RemoteDataSource
 import com.teblung.movieku.core.data.source.remote.network.ApiService
 import com.teblung.movieku.core.domain.repository.IMovieRepository
 import com.teblung.movieku.core.utils.AppExecutors
+import net.sqlcipher.database.SQLiteDatabase
+import net.sqlcipher.database.SupportFactory
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -21,10 +23,14 @@ import java.util.concurrent.TimeUnit
 val databaseModule = module {
     factory { get<MovieDatabase>().movieDao() }
     single {
+        val passphrase: ByteArray = SQLiteDatabase.getBytes("teblung".toCharArray())
+        val factory = SupportFactory(passphrase)
         Room.databaseBuilder(
                 androidContext(),
                 MovieDatabase::class.java, "Movie.db"
-        ).fallbackToDestructiveMigration().build()
+        ).fallbackToDestructiveMigration()
+            .openHelperFactory(factory)
+            .build()
     }
 }
 
